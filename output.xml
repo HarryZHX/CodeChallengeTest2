@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.2 (Python 3.9.6 on win32)" generated="20210819 00:50:37.609" rpa="false">
+<suite id="s1" name="DexcomDemo" source="C:\Users\11352\workspace\DexcomDemo">
+<suite id="s1-s1" name="CodechallengeTest2" source="C:\Users\11352\workspace\DexcomDemo\CodechallengeTest2.robot">
+<test id="s1-s1-t1" name="Check the POST Analysis Request Test">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>login</arg>
+<arg>${base_url_uam}</arg>
+<arg>verify=true</arg>
+</arguments>
+<msg timestamp="20210819 00:50:37.970" level="INFO">Creating Session using : alias=login, url=https://uam1.dexcom.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20210819 00:50:37.969" endtime="20210819 00:50:37.971"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+<arg>cookie=${cookie}</arg>
+</arguments>
+<assign>
+<var>${headers_signin}</var>
+</assign>
+<msg timestamp="20210819 00:50:37.972" level="INFO">${headers_signin} = {'Content-Type': 'application/x-www-form-urlencoded', 'cookie': 'idsrv.xsrf=8QyhmH3kfP6KLJz2C9YJAHp1Ae8-KMeQ84-MHcz6mv2V8tWfiYo6DwnO02U2gBAUIYcMCDtZaWvAzBU-mtA3zphTxoc5Yi5-b7resW1Ggps; idsvr.clients=W...</msg>
+<status status="PASS" starttime="20210819 00:50:37.971" endtime="20210819 00:50:37.972"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>username=codechallenge</arg>
+<arg>password=Password123</arg>
+<arg>idsrv.xsrf=A8L5Y8l7d-gJxtMAB_b5fYWjgE-TUkr9oswoPp3p1SNxl7mpR34-bU0zjOItnOIyoWTbImBBbxS6Swx-tJHRhdxavVaBYeLUIaB2lB9Jc2M</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20210819 00:50:37.973" level="INFO">${data} = {'username': 'codechallenge', 'password': 'Password123', 'idsrv.xsrf': 'A8L5Y8l7d-gJxtMAB_b5fYWjgE-TUkr9oswoPp3p1SNxl7mpR34-bU0zjOItnOIyoWTbImBBbxS6Swx-tJHRhdxavVaBYeLUIaB2lB9Jc2M'}</msg>
+<status status="PASS" starttime="20210819 00:50:37.973" endtime="20210819 00:50:37.974"></status>
+</kw>
+<kw name="Post On Session" library="RequestsLibrary">
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>login</arg>
+<arg>${signurl}</arg>
+<arg>data=${data}</arg>
+<arg>headers=${headers_signin}</arg>
+<arg>allow_redirects=${False}</arg>
+</arguments>
+<assign>
+<var>${resp_login}</var>
+</assign>
+<msg timestamp="20210819 00:50:38.382" level="INFO">POST Request : url=https://uam1.dexcom.com/identity/login?signin=24feba0108db83ae3bdd433074972d51 
+ path_url=/identity/login?signin=24feba0108db83ae3bdd433074972d51 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded', 'cookie': 'idsrv.xsrf=8QyhmH3kfP6KLJz2C9YJAHp1Ae8-KMeQ84-MHcz6mv2V8tWfiYo6DwnO02U2gBAUIYcMCDtZaWvAzBU-mtA3zphTxoc5Yi5-b7resW1Ggps; idsvr.clients=WyJEQUVDMjBBQy05NjI2LTRCMEUtOTRCNS1CNjc0RTI5OEY1MUUiLCIwYjcyYzU4MS0yZTk4LTQ2NDQtOTg5Yy01MmM3NmUzNDg0MmIiLCIxYmU0OTRhZC00MzEyLWE4ZjctYjAxYi0wYzNjZjZiOTNhOTYiXQ; SignInMessage.5b4b4de10a6b23297487f7185d03f28c=umnRSZnGNi6pjDgS2hrIdJ7tZSFUks7cZVRIaKWo8MnpStnhaJvHMA8XPwL0pkavs-wYMJCNpImMPdhPuKyrqCWvx2Jwh7PfnkWMFQbtV5W7QxZBzhxFNjja5V5kxpvjTBSDfXBFhoi5GqPXL5EkGnA-cVu5jErjmEUYhIrwKpcbTGVJ-t0I9lKzqphQB_9k04bVdGE7zbL4qt_5nJdJgY5jJFIQ1BTpiifgliiG7waxG-uuAzJn9rNAi4IwTxOEb8jjlj1SNj09fjWSfsltM0B52YEZbunicJi1ezahH2F955sTRb8jfV9bidsnzjaScFdtqwleue2FeS5J8izgytt6O2Un0F_N5dtzV5yWiv3aGtZrRDH2dewL2AQ9pCW1d5i0OlBnTSiHJvwR7zV-t_L3oRrgTfOLpZ7-nFDn5aWzYycy9KQ2bdzIuEVZIw4z5en9W4FnvtZwTXSdvfspRBqTCSm1MwmsiVfHH2uZ-DGFblilyP1aGdbjjjP6GtJKe4C7B0jPm_fPXvBugUShOVO8AWa1IHfvhd86UmEAS8qLJ0e5yU5mKsLBnMGPZZ3JKGB83ZJL_6Z9La5suXPwlv1LfXKol2kByHkUc9dewbS61xpfg9U_c7SYJcr5JKk5wbGDWwj6Bono4m9xwZYxwA; SignInMessage.d4857a13512d3905f4f0f93ea1d06720=4drUnUl-er-NtcnyyN4_UwmDidxYaI7WyS75WV5cs6oh3xLxKg1zicZZ4j_nGl75RLtB4F-Q6xZG_HW_iwZF24GvtQAWBMNsoxcVpk6FPpfq8j1V-WjPTdbJ65_14HkUxpVkpqUvOUkdN-CcVQYafphbWA7UIRqa4ArwKdInMDRkLTGMMuMqIAZODCU0709arNYaPn1_5D6Eu2tp9DPhp7rEJFfqUDFcvNy94WSMkEXvA-CC40oc1JTQJ8uy6rO8O2ritVya-gGyZ36vJmA_QL-P_JzA6LMIFL7pFLkudYmotrMpYzRAuzmFFsS5aTsoR0df9RjVbbFjfahJPiVEL7RyRKUN5t8DxNfPPbNCFQ39tTMR-h4WYrkVVxbnub9utWJ2BiGyqjSvubXa5tPCmwAi9ZbweQW_tkv8DGLEkk2vDJQ8zg1qhMjx7nzyyDQTJAcjUfwVcPvC_4lhOf9daa8qRTD52y_kYvzG3d8z01NqTlBKxsIE1Co8n5WL-OWs_o_zHS2jK93KRqaXiFE_IgQvfb76HcCV50juNzIraBWTppfJG1xfSWFyi8apYx-AhXnnIOvuuMwStR3eJ5P66SeK4fbovw2W-cDRTBD9r-YpwP6x_fmPbAUpO4hfbIvbIbOKuJIfpaViR97gpkd1aw; SignInMessage.a88294b9321767dace82a0997f81ddfc=pqu5HLvvTfkAdbMKR86AXD2J4ESpUeVRVVNi38RsvmP-r3biUmhdc5hCdoudSfz-ueFSFc0SyCjPkNnRUHr2y2dgOVZ1rmnnFMCIWMASOwtFUW_GbOR5V-fd_A3COO5qpWQaAmWA_ubWXd14UWQVEkbQJG-yvJlXQQvO7Uh-8xOp_Vq8kMcZfLFc6uWwIY2qceqiE-2jl-JnIdgWVH6CP1ud2QITB7SIDu_OzGdePtcxD1xdMT9saX9S7Bdj0rk0XbI12X3Q_xFlaKkpnQDhhoMQeGOJnIomhOZ8Ma-JQ6AZSnS1gBeuBh-nukF0_Q5RaUlYN5Bd8gKVZk-tJIDjsm0zLFoE1IOkmDwd8BNBRGYmm6cSF-sVMqzvYNn11hRI72kbXRlojZpQcwAUcVMi5608LSmG9nAIeztv0ltcTMqZp0H69yP-ZkNTmALir6wbtfGqOUsC7qknMI6CDR7Yy-a6ZT2BASlUFQAtyM-kEmpXo1WZJy8_3LGcjjR3c6Z-xdoND8kxZLRJNZAgxBt-MsVvjDLqSydkQ9YMQPQBogPl82o8zX1wlb9MUSHIwqgzcX5YmZqOWq8CDTMekPU2jqhaxqw2UPbLjVLKtvNZLkZX5p5eNpgKWG1sAm8UgVikDz83dCMb89BmF3_7NLPmzQ; SignInMessage.10210285e6df897d3ce8d946d1449f15=JORolkBBZw4ITrm-qLcs-PMkKJzjD9qsdL65TyoSOB1z2riDfRDkHVsTHmDmDdxG6Oayv_Qfpl0-HeL2bUQokfnNUfrtndBbaZ3HFdfdtlmcPHL5bk3VkjpTmmcjYC3t8BgERApPbFjtpoetzwvLTLB5MMJ37Z8kvtP-_KDf9rhhjq5PAsxyQHv0LOynWuLCM9koREdkRgkKxluZnhPkdtZurbGIb3hGenDv1N46T2SuYgyYckLbV2TvgOAQ-1C0xRvXUvizXTte6znIrefCthrvZjN9MAKw1GWfrnkmgiiqPVsbhiFTOK5rzf8rumeekBtKotXw62tE5mkBhCrB-x1qh7nIOKVadlTvRUhQxQtVOZHS_1g3YVp-CcWqfF_n5y1Ln32ytN2mlqJu-1re9e-n7eCOzZgVAuYYBNSk5hN7IMl3pBP1DoTIdG4JtLWja5fynnM5VXA7Zdfi6XdUc1r5EOsT7He80C14loERn59yxGnknMzpCWonNF1M9CvDsGWGjgs5KqkSkn2Q2m8hN6glYxcCJ7GsjMOxafOQrVfiZJ4QFpc2hAmptg--b0FPDfy4L7O2spJomw7iNw-4g_h9M2DjlJKumHxgrRAipBmz6-_ONokxlaQwTzh6jMCQJq2aJnsmlb9eY-eJBfIRQQ; idsvr.session=6ada38f53b7c8ececc765e804d4be988; SignInMessage.24feba0108db83ae3bdd433074972d51=0nhB5rSwnjZG4F1CpQVWp7hHDOGaplohB4vzdVqKW0uc2-Td-fuPBFl2BRBeY2ntNN_8QqLPzUnrH_McgUtrghsd3-p0ygjXgqKOS0agxulaEq6lOZB554UKwl7uGSJtQKMVyDk0eCGaxJEZCSENMdTwI-ox8S004QWaXnVoTvnxvhF_JBsrsn0gfy3dh4iI_-ynjKI6eOAG_-_AvGfqMYmA7nLPwdA5iWsXPUS4BK2jr4tGE1CltpKR_j-ap4950DxuWGFRoHkTPa7F-d6aDjzzd4vg86emRZ5Dli6adoUSO_Y_6ElP9uRxSqdXdeUbdw4VCSgThTyFs5S_0HPwi0zAhw8VfvDPTinjec6cwnfP8qQSvWyQgrYj9YQ7QN4LQviqOnhr9aYkSKS6vg3D-3ZTjAuXAmNVKtoAwFpjGovWNxyMku81v2W2Db5ScRRV0M8tmVrUjJQWpeRR8OQZrUmcsCdC1jPOtYYOjwqU3nD_Jwo2ozWAYr41ITyPjWKWf9sLx7Xn4gJo_cejFp7RLZfa4wsInNvukI6cLbPK3zd2NDSpVqTuxejsltjg4TxUN9hAtVtt-lZh8GXVbrKYOgzlGIP1X3daXG7ChlrPzF2MLrrT404KsoGwXPLZl-ua493wZd6va4vGvc0HcvCWdQ; has_js=1', 'Content-Length': '162'} 
+ body=username=codechallenge&amp;password=Password123&amp;idsrv.xsrf=A8L5Y8l7d-gJxtMAB_b5fYWjgE-TUkr9oswoPp3p1SNxl7mpR34-bU0zjOItnOIyoWTbImBBbxS6Swx-tJHRhdxavVaBYeLUIaB2lB9Jc2M 
+ </msg>
+<msg timestamp="20210819 00:50:38.382" level="INFO">POST Response : url=https://uam1.dexcom.com/identity/login?signin=24feba0108db83ae3bdd433074972d51 
+ status=302, reason=Found 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Expires': '-1', 'Location': 'https://uam1.dexcom.com/identity/connect/authorize?client_id=DAEC20AC-9626-4B0E-94B5-B674E298F51E&amp;prompt&amp;redirect_uri=https%3A%2F%2Fclarity.dexcom.com%2Fusers%2Fauth%2Fdexcom_sts%2Fcallback&amp;response_type=code&amp;scope=openid%20offline_access&amp;state=f2f85f3ca8342daaa4d17fd5fd4c18b75b05073842861fb9&amp;ui_locales=en-US', 'Server': 'Microsoft-IIS/10.0', 'Set-Cookie': 'SignInMessage.24feba0108db83ae3bdd433074972d51=.; path=/identity; expires=Wed, 19-Aug-2020 07:50:39 GMT; secure; HttpOnly, idsvr.session=7478fcfa4bf7f6f7e39642c9459f87c0; path=/identity; secure, idsrv.partial=; path=/identity; expires=Thu, 01-Jan-1970 00:00:00 GMT, idsrv.external=; path=/identity; expires=Thu, 01-Jan-1970 00:00:00 GMT, idsrv=SbRdppZ4npw5p-WnxE023r9TLnxQJpX5ARnZVpA3BBVVq3sw2dBBfqwu7EjmGCccbevUwLa4mJtaKa5m_-qw9Qwx3rhPU_y6qBnS3K4p_AOWphyK6YjO-343Q1nH8NObf9J6lb_n4hrcornmsF9ivAJKn2vFw0W4ZRHMTPuPTTODnGYYu9iyBznX-g74Rt0zmFz8P29Mz9Oano9_WCp7kPIBTpLBe_9m0KD88sBhFDVI5iBfhNgEqmR6apJRCJgO13Ciy4VSW-IbUq94lvltLWvYEDDEy7mJdJB36KVs9eEkR_6BiNbF9CNnjyBuiRjGn_ErCVp0XOk0xJbElu36PvWB0MZ3nt5VaydHk8Y1ZxSJPbCVxwzmCAPqf3pRA1Jd8-U3VHrDVxZlUwm1xrm9cg; path=/identity; secure; HttpOnly', 'X-Powered-By': 'ASP.NET', 'Strict-Transport-Security': 'max-age=31536000', 'Date': 'Thu, 19 Aug 2021 07:50:39 GMT', 'Content-Length': '0', 'Via': '1.1 google', 'Alt-Svc': 'clear'} 
+ body=None 
+ </msg>
+<msg timestamp="20210819 00:50:38.383" level="INFO">${resp_login} = &lt;Response [302]&gt;</msg>
+<status status="PASS" starttime="20210819 00:50:37.975" endtime="20210819 00:50:38.383"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${resp_login.headers.get("location")}</arg>
+</arguments>
+<assign>
+<var>${redirect_url}</var>
+</assign>
+<msg timestamp="20210819 00:50:38.384" level="INFO">${redirect_url} = https://uam1.dexcom.com/identity/connect/authorize?client_id=DAEC20AC-9626-4B0E-94B5-B674E298F51E&amp;prompt&amp;redirect_uri=https%3A%2F%2Fclarity.dexcom.com%2Fusers%2Fauth%2Fdexcom_sts%2Fcallback&amp;response_t...</msg>
+<status status="PASS" starttime="20210819 00:50:38.383" endtime="20210819 00:50:38.384"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>cookie=${cookie_callback}</arg>
+</arguments>
+<assign>
+<var>${headers_callback}</var>
+</assign>
+<msg timestamp="20210819 00:50:38.385" level="INFO">${headers_callback} = {'cookie': 'idsrv=giug7_F7ZlcUTkHS1tGdtMp48dzG_58dotAaPPykv0cIFqtkq1FBNCTOHQzgGuv5FJAUb4aDyjpiWlG6Wter2a6hGHnSgnAT8YPvXXRgvl5EuLWYwfes_gXMBEtDsTGHJ2uQCAPR4bETB38L1v1P2Av0QuPzBC50kBqT1Ykx53vIz9owkJRkbq...</msg>
+<status status="PASS" starttime="20210819 00:50:38.384" endtime="20210819 00:50:38.385"></status>
+</kw>
+<kw name="GET" library="RequestsLibrary">
+<doc>Sends a GET request.</doc>
+<arguments>
+<arg>${redirect_url}</arg>
+<arg>headers=${headers_callback}</arg>
+<arg>allow_redirects=${False}</arg>
+</arguments>
+<assign>
+<var>${resp_callback}</var>
+</assign>
+<msg timestamp="20210819 00:50:38.590" level="INFO">GET Request : url=https://uam1.dexcom.com/identity/connect/authorize?client_id=DAEC20AC-9626-4B0E-94B5-B674E298F51E&amp;prompt&amp;redirect_uri=https%3A%2F%2Fclarity.dexcom.com%2Fusers%2Fauth%2Fdexcom_sts%2Fcallback&amp;response_type=code&amp;scope=openid%20offline_access&amp;state=f2f85f3ca8342daaa4d17fd5fd4c18b75b05073842861fb9&amp;ui_locales=en-US 
+ path_url=/identity/connect/authorize?client_id=DAEC20AC-9626-4B0E-94B5-B674E298F51E&amp;prompt&amp;redirect_uri=https%3A%2F%2Fclarity.dexcom.com%2Fusers%2Fauth%2Fdexcom_sts%2Fcallback&amp;response_type=code&amp;scope=openid%20offline_access&amp;state=f2f85f3ca8342daaa4d17fd5fd4c18b75b05073842861fb9&amp;ui_locales=en-US 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'cookie': 'idsrv=giug7_F7ZlcUTkHS1tGdtMp48dzG_58dotAaPPykv0cIFqtkq1FBNCTOHQzgGuv5FJAUb4aDyjpiWlG6Wter2a6hGHnSgnAT8YPvXXRgvl5EuLWYwfes_gXMBEtDsTGHJ2uQCAPR4bETB38L1v1P2Av0QuPzBC50kBqT1Ykx53vIz9owkJRkbq1bkByY5MKl5Hs3T8hkdcpA1jxZirPfwFnaF6xhOKvmxoj165d4Ov3fwY3k6vcfFqfGM8DaXjrVsnOprJAb9EES9CXPRoYdXwopVi-NzVzk7i7QEFb6iVHiZndhycikNL37DKoTljUsjT_SiB2419TA4dzQYyj2oKmAuo2PQRyLmNiz5MMCHaWaWEKA9yKtM6SC7bBL9OecvKn_DHvW5jGAcdL3oH57QQ; Path=/identity; Secure; HttpOnly;'} 
+ body=None 
+ </msg>
+<msg timestamp="20210819 00:50:38.590" level="INFO">GET Response : url=https://uam1.dexcom.com/identity/connect/authorize?client_id=DAEC20AC-9626-4B0E-94B5-B674E298F51E&amp;prompt&amp;redirect_uri=https%3A%2F%2Fclarity.dexcom.com%2Fusers%2Fauth%2Fdexcom_sts%2Fcallback&amp;response_type=code&amp;scope=openid%20offline_access&amp;state=f2f85f3ca8342daaa4d17fd5fd4c18b75b05073842861fb9&amp;ui_locales=en-US 
+ status=302, reason=Found 
+ headers={'Location': 'https://clarity.dexcom.com/users/auth/dexcom_sts/callback?code=7df73b3efae2588a14bf754979c22ee0&amp;state=f2f85f3ca8342daaa4d17fd5fd4c18b75b05073842861fb9', 'Server': 'Microsoft-IIS/10.0', 'Set-Cookie': 'idsvr.clients=WyJEQUVDMjBBQy05NjI2LTRCMEUtOTRCNS1CNjc0RTI5OEY1MUUiXQ; path=/identity; secure; HttpOnly', 'X-Powered-By': 'ASP.NET', 'Strict-Transport-Security': 'max-age=31536000', 'Date': 'Thu, 19 Aug 2021 07:50:40 GMT', 'Content-Length': '0', 'Via': '1.1 google', 'Alt-Svc': 'clear'} 
+ body=None 
+ </msg>
+<msg timestamp="20210819 00:50:38.591" level="INFO">${resp_callback} = &lt;Response [302]&gt;</msg>
+<status status="PASS" starttime="20210819 00:50:38.385" endtime="20210819 00:50:38.591"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${resp_callback.headers.get("location")}</arg>
+</arguments>
+<assign>
+<var>${callback_url}</var>
+</assign>
+<msg timestamp="20210819 00:50:38.592" level="INFO">${callback_url} = https://clarity.dexcom.com/users/auth/dexcom_sts/callback?code=7df73b3efae2588a14bf754979c22ee0&amp;state=f2f85f3ca8342daaa4d17fd5fd4c18b75b05073842861fb9</msg>
+<status status="PASS" starttime="20210819 00:50:38.591" endtime="20210819 00:50:38.592"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Cookie=${cookie_final}</arg>
+</arguments>
+<assign>
+<var>${headers_final}</var>
+</assign>
+<msg timestamp="20210819 00:50:38.593" level="INFO">${headers_final} = {'Cookie': '_rogue_material_session=7d6a9221633a05c1c626cce1debe1572'}</msg>
+<status status="PASS" starttime="20210819 00:50:38.592" endtime="20210819 00:50:38.593"></status>
+</kw>
+<kw name="GET" library="RequestsLibrary">
+<doc>Sends a GET request.</doc>
+<arguments>
+<arg>${callback_url}</arg>
+<arg>headers=${headers_final}</arg>
+<arg>allow_redirects=${False}</arg>
+</arguments>
+<assign>
+<var>${resp_final}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.019" level="INFO">GET Request : url=https://clarity.dexcom.com/users/auth/dexcom_sts/callback?code=7df73b3efae2588a14bf754979c22ee0&amp;state=f2f85f3ca8342daaa4d17fd5fd4c18b75b05073842861fb9 
+ path_url=/users/auth/dexcom_sts/callback?code=7df73b3efae2588a14bf754979c22ee0&amp;state=f2f85f3ca8342daaa4d17fd5fd4c18b75b05073842861fb9 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Cookie': '_rogue_material_session=7d6a9221633a05c1c626cce1debe1572'} 
+ body=None 
+ </msg>
+<msg timestamp="20210819 00:50:39.019" level="INFO">GET Response : url=https://clarity.dexcom.com/users/auth/dexcom_sts/callback?code=7df73b3efae2588a14bf754979c22ee0&amp;state=f2f85f3ca8342daaa4d17fd5fd4c18b75b05073842861fb9 
+ status=302, reason=Found 
+ headers={'Server': 'nginx/1.20.1', 'Date': 'Thu, 19 Aug 2021 07:50:40 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Status': '302 Found', 'Cache-Control': 'no-store', 'Referrer-Policy': 'strict-origin-when-cross-origin', 'X-Permitted-Cross-Domain-Policies': 'none', 'Pragma': 'no-cache', 'X-XSS-Protection': '1; mode=block', 'Location': 'https://clarity.dexcom.com/users/auth/dexcom_sts', 'X-Download-Options': 'noopen', 'X-UA-Compatible': 'IE=edge, IE=edge', 'X-Runtime': '0.014359', 'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff', 'Expires': 'Fri, 01 Jan 1990 00:00:00 GMT', 'X-Powered-By': 'Phusion Passenger(R)', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'X-Request-ID': 'fdf8cf13901a583cfc028f88feb7ee64'} 
+ body=&lt;html&gt;&lt;body&gt;You are being &lt;a href="https://clarity.dexcom.com/users/auth/dexcom_sts"&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt; 
+ </msg>
+<msg timestamp="20210819 00:50:39.020" level="INFO">${resp_final} = &lt;Response [302]&gt;</msg>
+<status status="PASS" starttime="20210819 00:50:38.593" endtime="20210819 00:50:39.020"></status>
+</kw>
+<kw name="GET" library="RequestsLibrary">
+<doc>Sends a GET request.</doc>
+<arguments>
+<arg>https://clarity.dexcom.com/</arg>
+<arg>headers=${headers_final}</arg>
+</arguments>
+<assign>
+<var>${resp_token}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.507" level="INFO">GET Request : url=https://clarity.dexcom.com/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Cookie': '_rogue_material_session=7d6a9221633a05c1c626cce1debe1572'} 
+ body=None 
+ </msg>
+<msg timestamp="20210819 00:50:39.507" level="INFO">GET Response : url=https://clarity.dexcom.com/ 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.20.1', 'Date': 'Thu, 19 Aug 2021 07:50:41 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Status': '200 OK', 'Cache-Control': 'no-store', 'Vary': 'Accept', 'Referrer-Policy': 'strict-origin-when-cross-origin', 'X-Permitted-Cross-Domain-Policies': 'none', 'Pragma': 'no-cache', 'X-XSS-Protection': '1; mode=block', 'X-Download-Options': 'noopen', 'X-UA-Compatible': 'IE=edge, IE=edge', 'ETag': 'W/"17c278b008f0411e15d9dbb1bbf83b68"', 'X-Frame-Options': 'SAMEORIGIN', 'X-Runtime': '0.100200', 'X-Content-Type-Options': 'nosniff', 'Expires': 'Fri, 01 Jan 1990 00:00:00 GMT', 'X-Powered-By': 'Phusion Passenger(R)', 'Content-Encoding': 'gzip', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'X-Request-ID': '4b927d05acbcdf41b7767690c9ec3105'} 
+ body=
+&lt;!DOCTYPE html&gt;
+&lt;html dir="ltr"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;title&gt;Dexcom CLARITY&lt;/title&gt;
+    &lt;meta name="description" content=""&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    
+&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic"&gt; &lt;link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"&gt;
+&lt;meta name="uploader-frontend/config/environment" content="%7B%22modulePrefix%22%3A%22uploader-frontend%22%2C%22environment%22%3A%22production%22%2C%22serverVariables%22%3A%7B%22tagPrefix%22%3A%22env%22%2C%22vars%22%3A%5B%22globally-supported-countries%22%2C%22supported-locales%22%2C%22feature-sample-one%22%2C%22feature-sample-two%22%2C%22feature-sample-three%22%2C%22api-product-store-host%22%2C%22manage-receiver-capabilities%22%2C%22uploader-agent-min-version-osx%22%2C%22uploader-agent-min-version-win%22%2C%22uploader-agent-version-osx%22%2C%22uploader-agent-version-win%22%2C%22uploader-fetch-min-version-osx%22%2C%22uploader-fetch-min-version-win%22%2C%22uploader-fetch-version-osx%22%2C%22uploader-fetch-version-win%22%5D%2C%22defaults%22%3A%7B%22globally-supported-countries%22%3A%22US%2CIE%2CIT%2CNL%2CDE%2CGB%2CCA%2CCH%22%2C%22supported-locales%22%3A%22de-DE%2Cde-CH%2Cen-CA%2Cen-US%2Cfr-CA%2Cfr-FR%2Cit-CH%2Cit-IT%2Cnl-NL%22%2C%22feature-sample-one%22%3Atrue%2C%22feature-sample-three%22%3Afalse%2C%22feature-sample-two%22%3Afalse%2C%22api-product-store-host%22%3A%22productstore.clarity.dexcom.com%22%2C%22manage-receiver-capabilities%22%3A%22G6%3Dreset%2Cblind%22%2C%22uploader-agent-min-version-osx%22%3A%221.1.0%22%2C%22uploader-agent-min-version-win%22%3A%221.1.0%22%2C%22uploader-agent-version-osx%22%3A%221.2.0%22%2C%22uploader-agent-version-win%22%3A%221.2.0%22%2C%22uploader-fetch-min-version-osx%22%3A%222.3.0%22%2C%22uploader-fetch-min-version-win%22%3A%222.3.0%22%2C%22uploader-fetch-version-osx%22%3A%222.4.0%22%2C%22uploader-fetch-version-win%22%3A%222.4.0%22%7D%7D%2C%22ember-paper%22%3A%7B%22insertFontLinks%22%3Atrue%7D%2C%22i18n%22%3A%7B%22defaultLocale%22%3A%22en-US%22%7D%7D"&gt;
+    
+&lt;meta name="env-a1c-gmi-statistic" content="gmi"&gt;
+&lt;meta name="env-api-product-store-host" content="productstore.clarity.dexcom.com"&gt;
+&lt;meta name="env-clarity-public-base-uri" content="https://clarity.dexcom.com"&gt;
+&lt;meta name="env-dexcom-sts-site" content="https://uam1.dexcom.com/"&gt;
+&lt;meta name="env-eu-cookie-clinic-user-expiration-duration" content="7d"&gt;
+&lt;meta name="env-globally-supported-countries" content="US"&gt;
+&lt;meta name="env-manage-receiver-capabilities" content=""&gt;
+&lt;meta name="env-manage-receiver-supported-countries" content="--"&gt;
+&lt;meta name="env-max-data-polling-duration" content="60s"&gt;
+&lt;meta name="env-operating-system-warning-interval" content="12h"&gt;
+&lt;meta name="env-product-store-protocol" content="https"&gt;
+&lt;meta name="env-rtl-languages" content="[&amp;quot;AR&amp;quot;, &amp;quot;DV&amp;quot;, &amp;quot;FA&amp;quot;, &amp;quot;HE&amp;quot;, &amp;quot;KS&amp;quot;, &amp;quot;KU&amp;quot;, &amp;quot;PS&amp;quot;, &amp;quot;UR&amp;quot;]"&gt;
+&lt;meta name="env-release-dom" content="2021-07-21"&gt;
+&lt;meta name="env-server-audience" content="UnitedStates"&gt;
+&lt;meta name="env-supported-locales" content="en-US"&gt;
+&lt;meta name="env-ui-theme" content="material"&gt;
+&lt;meta name="env-uploader-agent-min-version-osx" content="3.0.0"&gt;
+&lt;meta name="env-uploader-agent-min-version-win" content="3.0.0"&gt;
+&lt;meta name="env-uploader-agent-version-osx" content="3.1.0"&gt;
+&lt;meta name="env-uploader-agent-version-win" content="3.1.0"&gt;
+&lt;meta name="env-uploader-fetch-min-version-osx" content="2.4.0"&gt;
+&lt;meta name="env-uploader-fetch-min-version-win" content="2.4.0"&gt;
+&lt;meta name="env-uploader-fetch-version-osx" content="2.6.0"&gt;
+&lt;meta name="env-uploader-fetch-version-win" content="2.6.0"&gt;
+&lt;meta name="env-feature-agp-page" content="true"&gt;
+&lt;meta name="env-feature-clarity-international-debug" content="false"&gt;
+&lt;meta name="env-feature-clinic-anonymous-upload" content="false"&gt;
+&lt;meta name="env-feature-copy-as-text" content="true"&gt;
+&lt;meta name="env-feature-daily-report-enhancement" content="false"&gt;
+&lt;meta name="env-feature-ember-upload-widget" content="true"&gt;
+&lt;meta name="env-feature-eu-cookie-prompt" content="false"&gt;
+&lt;meta name="env-feature-g6-pro-report" content="true"&gt;
+&lt;meta name="env-feature-glossary" content="true"&gt;
+&lt;meta name="env-feature-help-center" content="true"&gt;
+&lt;meta name="env-feature-home-user-support" content="true"&gt;
+&lt;meta name="env-feature-hide-urgent-low-soon-threshold" content="true"&gt;
+&lt;meta name="env-feature-hypoglycemic-risk-statistic" content="false"&gt;
+&lt;meta name="env-feature-insulin" content="true"&gt;
+&lt;meta name="env-feature-jp-field-switch" content="false"&gt;
+&lt;meta name="env-feature-mmol-option" content="false"&gt;
+&lt;meta name="env-feature-mock-printing" content="false"&gt;
+&lt;meta name="env-feature-protobuf-uploads" content="false"&gt;
+&lt;meta name="env-feature-sensor-usage-statistic" content="true"&gt;
+&lt;meta name="env-feature-show-manage-consent" content="false"&gt;
+&lt;meta name="env-feature-show-no-delay-safety-warning" content="true"&gt;
+&lt;meta name="env-feature-statistics-page" content="true"&gt;
+&lt;meta name="env-feature-sumologic-analytics" content="true"&gt;
+&lt;meta name="env-feature-urgent-low" content="false"&gt;
+&lt;meta name="env-available-reports" content="overview,patterns,overlay,daily,compare,dailyStatistics,hourlyStatistics,agp"&gt;
+    &lt;!--[if lt IE 9]&gt;
+      &lt;script src="/assets/vendor/html5shiv-bae68b27f8feb0dd75cbb541e1d1c827.js" -%&gt;
+    &lt;![endif]--&gt;
+    &lt;meta name="frontend/config/asset-manifest" content="%7B%22bundles%22%3A%7B%22uploader-frontend%22%3A%7B%22assets%22%3A%5B%7B%22uri%22%3A%22/engines-dist/uploader-frontend/config/environment-f93b510bfef64ab8245af2ebde335105.js%22%2C%22type%22%3A%22js%22%7D%5D%7D%7D%7D"&gt;
+      &lt;script&gt;
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21215537-10', 'auto');
+    ga('set', 'userId', '33498f15-e291-4e27-bb2f-e76b8a82313a');
+    ga('set', 'dimension2', 'HomeUser');
+    ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+&lt;/script&gt;
+
+
+  &lt;noscript&gt;
+    &lt;meta http-equiv="Refresh" content="0; url=/javascript-disabled"&gt;
+  &lt;/noscript&gt;
+  
+
+  &lt;script type="text/javascript"&gt;
+    !function(){"use strict";function o(){try{document.cookie="cookietest=1";var o=-1!==document.cookie.indexOf("cookietest=");return document.cookie="cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT",o}catch(e){return!1}}o()||(window.location.href="/cookies-disabled")}();
+  &lt;/script&gt;
+
+&lt;meta name="csrf-param" content="authenticity_token"&gt;
+&lt;meta name="csrf-token" content="dlpF7ItCVvpZPyrdMZXJboF/Sk15PFqd58NDDnz0mv/y2VK8vuDXRz8/0PrXuDdSz6r37lHIOhWgi5h3CvLobQ=="&gt;
+  &lt;meta name="apple-itunes-app" content="app-id=1019225730"&gt;
+
+  &lt;link rel="manifest" href="/assets/android_banner_manifest.json"&gt;
+
+&lt;meta name="description" content="Dexcom CLARITY software highlights your glucose patterns, trends and statistics. Share with your clinic and monitor improvements between visits. CLARITY is an important part of your Dexcom CGM system."&gt;
+&lt;meta name="keywords" content="dexcom clarity, dexcom, clarity, retrospective data, glucose data, glucose reports, agp, glucose statistics, glucose metrics, glucose graphs, diabetes reports, cgm, continuous glucose monitoring"&gt;
+
+&lt;link rel="alternate" hreflang="ar-ae" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="ar-bh" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="ar-jo" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="ar-kw" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="ar-lb" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="ar-om" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="ar-qa" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="ar-sa" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="bg-bg" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="cs-cz" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="da-dk" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="de-at" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="de-ch" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="de-de" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="en-au" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="en-ca" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="en-gb" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="en-hk" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="en-ie" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="en-in" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="en-mt" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="en-nz" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="en-us" href="https://clarity.dexcom.com"&gt;
+&lt;link rel="alternate" hreflang="en-za" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="es-cl" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="es-es" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="es-mx" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="et-ee" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="fi-fi" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="fr-fr" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="fr-lu" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="he-il" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="hu-hu" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="alternate" hreflang="it-it" href="https://clarity.dexcom.eu"&gt;
+&lt;link rel="a... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20210819 00:50:39.508" level="INFO">${resp_token} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210819 00:50:39.020" endtime="20210819 00:50:39.508"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${resp_token.text}</arg>
+</arguments>
+<assign>
+<var>${raw_response}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.509" level="INFO">${raw_response} = 
+&lt;!DOCTYPE html&gt;
+&lt;html dir="ltr"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;title&gt;Dexcom CLARITY&lt;/title&gt;
+    &lt;meta name="description" content="...</msg>
+<status status="PASS" starttime="20210819 00:50:39.508" endtime="20210819 00:50:39.509"></status>
+</kw>
+<kw name="Get Lines Matching Regexp" library="String">
+<doc>Returns lines of the given ``string`` that match the regexp ``pattern``.</doc>
+<arguments>
+<arg>${raw_response}</arg>
+<arg>window\.ACCESS</arg>
+<arg>partial_match=true</arg>
+</arguments>
+<assign>
+<var>${lines}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.510" level="INFO">1 out of 247 lines matched</msg>
+<msg timestamp="20210819 00:50:39.510" level="INFO">${lines} =       window.ACCESS_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3N3ZWV0c3BvdGRpYWJldGVzLmNvbSIsInN1YiI6IlN3ZWV0c3BvdCIsImlhdCI6MTYyOTM1OTQ0MCwiY29uc2VudFBlcm1pc3Npb24iOiJsaW5rZW...</msg>
+<status status="PASS" starttime="20210819 00:50:39.509" endtime="20210819 00:50:39.510"></status>
+</kw>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${lines}</arg>
+<arg>".+"</arg>
+</arguments>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.511" level="INFO">${result} = ['"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3N3ZWV0c3BvdGRpYWJldGVzLmNvbSIsInN1YiI6IlN3ZWV0c3BvdCIsImlhdCI6MTYyOTM1OTQ0MCwiY29uc2VudFBlcm1pc3Npb24iOiJsaW5rZWRTdWJqZWN0cyIsImRleGNvbUlk...</msg>
+<status status="PASS" starttime="20210819 00:50:39.511" endtime="20210819 00:50:39.511"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${result}</arg>
+</arguments>
+<assign>
+<var>${result_str}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.512" level="INFO">${result_str} = ['"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3N3ZWV0c3BvdGRpYWJldGVzLmNvbSIsInN1YiI6IlN3ZWV0c3BvdCIsImlhdCI6MTYyOTM1OTQ0MCwiY29uc2VudFBlcm1pc3Npb24iOiJsaW5rZWRTdWJqZWN0cyIsImRleGNvbUlk...</msg>
+<status status="PASS" starttime="20210819 00:50:39.512" endtime="20210819 00:50:39.512"></status>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<arguments>
+<arg>${result_str}</arg>
+</arguments>
+<assign>
+<var>${length}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.513" level="INFO">Length is 689</msg>
+<msg timestamp="20210819 00:50:39.513" level="INFO">${length} = 689</msg>
+<status status="PASS" starttime="20210819 00:50:39.512" endtime="20210819 00:50:39.513"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>${length}-${3}</arg>
+</arguments>
+<assign>
+<var>${end}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.513" level="INFO">${end} = 686</msg>
+<status status="PASS" starttime="20210819 00:50:39.513" endtime="20210819 00:50:39.513"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${result_str}</arg>
+<arg>3</arg>
+<arg>${end}</arg>
+</arguments>
+<assign>
+<var>${result_str_new}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.514" level="INFO">${result_str_new} = eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3N3ZWV0c3BvdGRpYWJldGVzLmNvbSIsInN1YiI6IlN3ZWV0c3BvdCIsImlhdCI6MTYyOTM1OTQ0MCwiY29uc2VudFBlcm1pc3Npb24iOiJsaW5rZWRTdWJqZWN0cyIsImRleGNvbUlkIjo...</msg>
+<status status="PASS" starttime="20210819 00:50:39.514" endtime="20210819 00:50:39.514"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<arg>verify=True</arg>
+</arguments>
+<msg timestamp="20210819 00:50:39.515" level="INFO">Creating Session using : alias=mysession, url=https://clarity.dexcom.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20210819 00:50:39.514" endtime="20210819 00:50:39.515"></status>
+</kw>
+<kw name="Get On Session" library="RequestsLibrary">
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>mysession</arg>
+<arg>/</arg>
+<arg>expected_status=200</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.892" level="INFO">GET Request : url=https://clarity.dexcom.com/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210819 00:50:39.892" level="INFO">GET Response : url=https://clarity.dexcom.com/ 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.20.1', 'Date': 'Thu, 19 Aug 2021 07:50:41 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Status': '200 OK', 'Cache-Control': 'no-store', 'Vary': 'Accept', 'Referrer-Policy': 'strict-origin-when-cross-origin', 'X-Permitted-Cross-Domain-Policies': 'none', 'Pragma': 'no-cache', 'X-XSS-Protection': '1; mode=block', 'X-Download-Options': 'noopen', 'X-UA-Compatible': 'IE=edge, IE=edge', 'ETag': 'W/"96bd28907a2fd7b34356cbc4dc8d455d"', 'X-Frame-Options': 'SAMEORIGIN', 'X-Runtime': '0.049795', 'X-Content-Type-Options': 'nosniff', 'Expires': 'Fri, 01 Jan 1990 00:00:00 GMT', 'Set-Cookie': '_rogue_material_session=f93897743b981c9323020eebed7e8aea; path=/; secure; HttpOnly', 'X-Powered-By': 'Phusion Passenger(R)', 'Content-Encoding': 'gzip', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'X-Request-ID': 'c98659679eee3b6d784484cf2a99bbef'} 
+ body=&lt;!doctype html&gt;
+  &lt;html dir=ltr &gt;
+
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+  &lt;meta name="viewport" content="width=device-width; initial-scale=1;"&gt;
+  &lt;title&gt;Dexcom CLARITY&lt;/title&gt;
+  &lt;!--[if lt IE 9]&gt;
+    &lt;script src="/assets/vendor/html5shiv-3481001ecf33e49ca9e98b5dbd99334cffcd0b1d9c27b554463e70735e9a17e3.js"&gt;&lt;/script&gt;  &lt;![endif]--&gt;
+  &lt;script&gt;
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-21215537-10', 'auto');
+    ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+&lt;/script&gt;
+
+
+  &lt;noscript&gt;
+    &lt;meta http-equiv="Refresh" content="0; url=/javascript-disabled" /&gt;
+  &lt;/noscript&gt;
+  
+
+  &lt;script type="text/javascript"&gt;
+    !function(){"use strict";function o(){try{document.cookie="cookietest=1";var o=-1!==document.cookie.indexOf("cookietest=");return document.cookie="cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT",o}catch(e){return!1}}o()||(window.location.href="/cookies-disabled")}();
+  &lt;/script&gt;
+
+&lt;meta name="csrf-param" content="authenticity_token" /&gt;
+&lt;meta name="csrf-token" content="zxO/AyIuGGMgeYHUBZ8f3Ma9+tpLUal2kK2teyzMFfp1rs2wEJrIL4og51YkELfdLGubgajBSoCnXfXqvfDeLg==" /&gt;
+  &lt;meta name="apple-itunes-app" content="app-id=1019225730"&gt;
+
+  &lt;link rel="manifest" href="/assets/android_banner_manifest.json"&gt;
+
+&lt;meta name="description" content="Dexcom CLARITY software highlights your glucose patterns, trends and statistics. Share with your clinic and monitor improvements between visits. CLARITY is an important part of your Dexcom CGM system." /&gt;
+&lt;meta name="keywords" content="dexcom clarity, dexcom, clarity, retrospective data, glucose data, glucose reports, agp, glucose statistics, glucose metrics, glucose graphs, diabetes reports, cgm, continuous glucose monitoring" /&gt;
+
+&lt;link rel="alternate" hreflang="ar-ae" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="ar-bh" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="ar-jo" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="ar-kw" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="ar-lb" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="ar-om" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="ar-qa" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="ar-sa" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="bg-bg" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="cs-cz" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="da-dk" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="de-at" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="de-ch" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="de-de" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="en-au" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="en-ca" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="en-gb" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="en-hk" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="en-ie" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="en-in" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="en-mt" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="en-nz" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="en-us" href="https://clarity.dexcom.com" /&gt;
+&lt;link rel="alternate" hreflang="en-za" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="es-cl" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="es-es" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="es-mx" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="et-ee" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="fi-fi" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="fr-fr" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="fr-lu" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="he-il" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="hu-hu" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="it-it" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="ja-jp" href="https://clarity.dexcom.jp" /&gt;
+&lt;link rel="alternate" hreflang="ko-kr" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="lt-lt" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="lv-lv" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="nb-no" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="nl-be" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="nl-nl" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="pl-pl" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="pt-pt" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="sk-sk" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="sl-si" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="sv-se" href="https://clarity.dexcom.eu" /&gt;
+&lt;link rel="alternate" hreflang="tr-tr" href="https://clarity.dexcom.eu" /&gt;
+
+
+
+
+
+  &lt;link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" /&gt;
+  &lt;link rel="stylesheet" href="/assets/vendor-e93cce35495db862b345a863b4426966.css"&gt;&lt;link rel="stylesheet" href="/assets/frontend-15d38baf70c75ab5712737ff7148895b.css"&gt;
+  
+&lt;/head&gt;
+
+&lt;body class=" ui-theme-material landing-page"&gt;
+  &lt;div class="wrapper"&gt;
+    &lt;user-notification-banner style="display:none"&gt;
+      &lt;div class="user-notification-banner__message"&gt;
+        &lt;span class="user-notification-banner__message-content"&gt;&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/user-notification-banner&gt;
+    &lt;div class="torso torso-content-container"&gt;
+      &lt;div class="landing container text-center page-content"&gt;
+        &lt;div class="header-logo-container"&gt;
+          &lt;div class="rails-header-logo" &gt;
+            &lt;a target="_blank" href="http://www.dexcom.com/" rel="noopener noreferrer"&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        
+        &lt;div class="main-landing"&gt;
+          &lt;div class="main-landing"&gt;
+  &lt;header&gt;
+    &lt;h1&gt;
+      Welcome to Dexcom CLARITY, your&lt;br /&gt;diabetes management application.
+    &lt;/h1&gt;
+    &lt;p&gt;
+      Upload glucose data from a Dexcom CGM device and then view the data in easy-to-read graphs. You can view trends, statistics and day-by-day data and then email them to your healthcare professional -- right from the Dexcom CLARITY webpage.
+    &lt;/p&gt;
+      &lt;p&gt;
+        &lt;br&gt;
+        Do not use Dexcom CLARITY for treatment decisions, such as insulin dosing. The user should follow instructions on the continuous glucose monitoring system.
+      &lt;/p&gt;
+  &lt;/header&gt;
+  &lt;nav class="horizontal-panels"&gt;
+    &lt;ul&gt;
+      &lt;li class="panel home-user"&gt;
+        &lt;h2&gt;
+          Home User
+        &lt;/h2&gt;
+        &lt;p&gt;
+          Connect your Dexcom receiver to upload and view glucose data in the way that works best for you. Then, with a few clicks, you can save, print or email your data reports.
+        &lt;/p&gt;
+        &lt;div class="landing-page__button-holder"&gt;
+          &lt;a class="btn btn-primary btn-lg btn-3d landing-page--button" href="/users/auth/dexcom_sts"&gt;Dexcom CLARITY for Home Users&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li class="panel clinic-user"&gt;
+        &lt;h2&gt;
+          Healthcare Professional
+        &lt;/h2&gt;
+        &lt;p&gt;
+          View your patients' trends or dive into their data with Dexcom CLARITY. The different reports allow you to get the most out of each patient visit, and the data-sharing features can keep you updated between visits.
+        &lt;/p&gt;
+        &lt;div class="landing-page__button-holder"&gt;
+          &lt;a class="btn btn-primary btn-lg btn-3d landing-page--button" href="/clinic?locale=en-US"&gt;Dexcom CLARITY for Clinics&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;
+
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- The div.push makes the footer stick to the bottom of the page when the page content is short --&gt;
+    &lt;!-- http://ryanfait.com/resources/footer-stick-to-bottom-of-page/ --&gt;
+    &lt;div class="push"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="footer-wrapper"&gt;
+  &lt;footer class="primary layout-row"&gt;
+
+    &lt;div class="footer__col1" dir="ltr"&gt;
+      &lt;div class="footer__brand-logo"&gt;
+        &lt;a target="_blank" href="https://www.dexcom.com/" class="dexcom-logo"&gt;
+          &lt;img src="/assets/dexcom-logo-white.svg" alt="Dexcom logo"&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div class="footer__copyright"&gt;© 2015-2021&lt;/div&gt;
+
+
+    &lt;/div&gt;
+
+    &lt;div class="footer__col2"&gt;
+      &lt;nav class="footer__nav"&gt;
+        &lt;ul class="nav"&gt;
+          &lt;li&gt;&lt;a target="_blank" href="https://www.dexcom.com/terms_of_use" class="footer__links__terms-of-use"&gt;Terms of Use&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a target="_blank" href="https://www.dexcom.com/privacy-policy" class="footer__links__privacy-policy"&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+
+      &lt;div class="footer__attribution"&gt;
+          Dexcom and Dexcom CLARITY are registered trademarks of Dexcom, Inc. in the United States and may be in other countries. All other marks are property of their respective owners.
+      &lt;/div&gt;
+
+        &lt;div class="footer__udi footer__udi--us"&gt;
+          00386270000491  •  Dexcom CLARITY v3.36.4  •  PN 350-0011  •  DOM 2021-07-21
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/footer&gt;
+&lt;/div&gt;
+
+
+  &lt;script src="/assets/jquery3-3c6aab2d5efca2dda50420efd5a6313adbd2c9a25efd216e2a809ed8c993749d.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+    window.USER_LOCALE = 'en-US';
+    window.USER_NOTIFICATION_HOST = 'https://produ... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20210819 00:50:39.893" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210819 00:50:39.515" endtime="20210819 00:50:39.893"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Access-Token=${result_str_new}</arg>
+<arg>Content-Type=application/json</arg>
+<arg>charset=utf-8</arg>
+</arguments>
+<assign>
+<var>${hearders}</var>
+</assign>
+<msg timestamp="20210819 00:50:39.894" level="INFO">${hearders} = {'Access-Token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3N3ZWV0c3BvdGRpYWJldGVzLmNvbSIsInN1YiI6IlN3ZWV0c3BvdCIsImlhdCI6MTYyOTM1OTQ0MCwiY29uc2VudFBlcm1pc3Npb24iOiJsaW5rZWRTdWJqZWN0c...</msg>
+<status status="PASS" starttime="20210819 00:50:39.893" endtime="20210819 00:50:39.894"></status>
+</kw>
+<kw name="Post On Session" library="RequestsLibrary">
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>mysession</arg>
+<arg>/api/subject/1681277794575765504/analysis_session</arg>
+<arg>headers=${hearders}</arg>
+</arguments>
+<assign>
+<var>${resp_post}</var>
+</assign>
+<msg timestamp="20210819 00:50:40.030" level="INFO">POST Request : url=https://clarity.dexcom.com/api/subject/1681277794575765504/analysis_session 
+ path_url=/api/subject/1681277794575765504/analysis_session 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Access-Token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3N3ZWV0c3BvdGRpYWJldGVzLmNvbSIsInN1YiI6IlN3ZWV0c3BvdCIsImlhdCI6MTYyOTM1OTQ0MCwiY29uc2VudFBlcm1pc3Npb24iOiJsaW5rZWRTdWJqZWN0cyIsImRleGNvbUlkIjoiMjgzOWNkZmQtZWI1NC00MWU4LWI5YmYtYTA4OGUwODhmMzI1IiwiZXhwIjoxNjI5NDQ1ODQwLCJyb2xlIjoiT3duZXIiLCJzdWJqZWN0SWQiOiIxNjgxMjc3Nzk0NTc1NzY1NTA0In0.j0vx-MmueJrRZcZS54p5RP7nzXHxnSMUQsNRFxf1MIj32Ebj2RmrrTOXPKkxqX7djei646BBk4BQpaeDq4xGAyCHiK5ncv4dlpVVrHGkFcOg_1MIPqtnFYtGMMkTKXfFzGo5gHAAVVOyfmERnFACaekDxUjzdrfemYH-QqT4DTmV_lRROeN08tkE_aVjrj3qb6sZBz0hcF7NYwaDS_xsxK5sT208oghNXB34efkVDq2PQxD4nUwWeDjHO4jLzO3Imh0MzV4_VgNfujQrDlpyelcU68x92heYsKyZbGmOXErPBmSwJ7kkN7vOIW9mY_TqBLNoLAarbQCHhp6-ELXwXQ', 'Content-Type': 'application/json', 'charset': 'utf-8', 'Cookie': '_rogue_material_session=f93897743b981c9323020eebed7e8aea', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20210819 00:50:40.030" level="INFO">POST Response : url=https://clarity.dexcom.com/api/subject/1681277794575765504/analysis_session 
+ status=200, reason=OK 
+ headers={'Server': 'nginx/1.20.1', 'Date': 'Thu, 19 Aug 2021 07:50:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '115', 'Connection': 'keep-alive', 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains', 'X-UA-Compatible': 'IE=edge', 'X-Request-ID': '35dd28cebd54791bf57a314bb279e10e'} 
+ body={"analysisSessionId":"1708507205798662144","dateTime":"2021-08-19T07:50:41.565Z","subjectId":"1681277794575765504"} 
+ </msg>
+<msg timestamp="20210819 00:50:40.031" level="INFO">${resp_post} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210819 00:50:39.894" endtime="20210819 00:50:40.031"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${resp_post.json().get("analysisSessionId")}</arg>
+</arguments>
+<status status="PASS" starttime="20210819 00:50:40.032" endtime="20210819 00:50:40.034"></status>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${resp_post.json().get("analysisSessionId")}</arg>
+</arguments>
+<msg timestamp="20210819 00:50:40.036" level="INFO">Length is 19</msg>
+<status status="PASS" starttime="20210819 00:50:40.035" endtime="20210819 00:50:40.037"></status>
+</kw>
+<status status="PASS" starttime="20210819 00:50:37.968" endtime="20210819 00:50:40.038" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20210819 00:50:37.669" endtime="20210819 00:50:40.040"></status>
+</suite>
+<status status="PASS" starttime="20210819 00:50:37.650" endtime="20210819 00:50:40.044"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="DexcomDemo">DexcomDemo</stat>
+<stat pass="1" fail="0" id="s1-s1" name="CodechallengeTest2">DexcomDemo.CodechallengeTest2</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
